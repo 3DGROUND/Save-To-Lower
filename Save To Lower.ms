@@ -3,25 +3,23 @@ category:"[3DGROUND]"
 toolTip:"Save To Lower"
 buttontext:"Save To Lower"
 (
-	fn getMaxVersion =
-	(
+	-- Version 2.0.0
+	-- MastaMan
+	-- https://3dground.net/
+	
+	fn getMaxVersion = (
 		v = maxVersion()
-		v = (v[1] / 1000) - 2
-		
-		case v of 
-		(
-			11: #(2010,2011)
-			12: #(2010,2011,2012)
-			13: #(2010,2011,2012,2013)
-			14: #(2011,2012,2013,2014)
-			15: #(2012,2013,2014,2015)
-			16: #(2013,2014,2015,2016)
-			17: #(2014,2015,2016,2017)
-			18: #(2015,2016,2017,2018)
-			19: #(2016,2017,2018,2019)
-			20: #(2017,2018,2019,2020)
-			default: #(2000 + v)
-		)
+        v = (v[1] / 1000) - 2
+        
+        a = 2000 + v
+        
+        o = case v of (
+            11: #(a - 1, a)
+            12: #(a - 2, a - 1, a)
+            default: #(a - 3, a - 2, a - 1, a)
+        )
+        
+        return (for i in o collect i)
 	)
 	
 	fn getPath = maxFilePath + maxFileName
